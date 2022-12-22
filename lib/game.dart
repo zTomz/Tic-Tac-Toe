@@ -322,6 +322,7 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
+  // Get the radius for each a tile 
   BorderRadius getBorderRadiusForTile(int index) {
     if (index == 0) {
       return const BorderRadius.only(
