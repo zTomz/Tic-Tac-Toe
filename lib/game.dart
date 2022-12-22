@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tic_tac_toe/colors.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -30,6 +31,7 @@ class _GameScreenState extends State<GameScreen> {
   Map<String, int> wins = {
     "X": 0,
     "O": 0,
+    "Tie": 0,
   };
 
   @override
@@ -103,8 +105,12 @@ class _GameScreenState extends State<GameScreen> {
             ),
             const SizedBox(height: 5),
             Container(
-              width: MediaQuery.of(context).size.width * 0.35,
-              height: MediaQuery.of(context).size.width * 0.35,
+              width: MediaQuery.of(context).size.width * 0.35 > 500
+                  ? MediaQuery.of(context).size.width * 0.35
+                  : 350,
+              height: MediaQuery.of(context).size.width * 0.35 > 500
+                  ? MediaQuery.of(context).size.width * 0.35
+                  : 350,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey, width: 1),
                 borderRadius: BorderRadius.circular(25),
@@ -190,6 +196,7 @@ class _GameScreenState extends State<GameScreen> {
                                 ),
                               ),
                             );
+                            resetGame("Tie");
                             return;
                           }
 
@@ -271,6 +278,7 @@ class _GameScreenState extends State<GameScreen> {
                             style: GoogleFonts.nunito(
                               fontSize: 30,
                               fontWeight: FontWeight.w700,
+                              color: getColor(gameField[index]),
                             ),
                           ),
                         ),
@@ -286,7 +294,7 @@ class _GameScreenState extends State<GameScreen> {
                           color: Colors.white.withOpacity(0.3),
                           child: Center(
                             child: Text(
-                              "$winningPlayer won\nthe game!",
+                              winningPlayer == "Tie"? "Tie" : "$winningPlayer won\nthe game!",
                               style: GoogleFonts.nunito(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w700,
@@ -306,6 +314,13 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 
+  Color getColor(String text) {
+    if (text == "X") return kRed;
+    if (text == "O") return kGreen;
+
+    return Colors.black;
+  }
+
   void resetGame(String currentPlayer) {
     setState(() {
       winningPlayer = currentPlayer;
@@ -322,7 +337,7 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
-  // Get the radius for each a tile 
+  // Get the radius for each a tile
   BorderRadius getBorderRadiusForTile(int index) {
     if (index == 0) {
       return const BorderRadius.only(
