@@ -42,6 +42,27 @@ class _GameScreenState extends State<GameScreen> {
           } else {
             startPlayer = "X";
           }
+
+          ScaffoldMessenger.of(context).clearSnackBars();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              duration: const Duration(seconds: 2),
+              backgroundColor: const Color(0xFFE3F9DC),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              width: 500,
+              behavior: SnackBarBehavior.floating,
+              content: Text(
+                "Starting player is now $startPlayer",
+                style: GoogleFonts.nunito(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          );
         },
         tooltip: "Switch starting player",
         child: const Icon(Icons.rotate_left_rounded),
@@ -139,14 +160,21 @@ class _GameScreenState extends State<GameScreen> {
                             ScaffoldMessenger.of(context).clearSnackBars();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
+                                duration: const Duration(seconds: 2),
+                                backgroundColor: const Color(0xFFE3F9DC),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                width: 500,
+                                behavior: SnackBarBehavior.floating,
                                 content: Text(
                                   "Tie",
                                   style: GoogleFonts.nunito(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
+                                    color: Colors.black,
                                   ),
                                 ),
-                                behavior: SnackBarBehavior.floating,
                                 action: SnackBarAction(
                                   label: "Reset",
                                   onPressed: () {
@@ -170,14 +198,20 @@ class _GameScreenState extends State<GameScreen> {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 duration: const Duration(seconds: 2),
+                                backgroundColor: const Color(0xFFE3F9DC),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                width: 500,
+                                behavior: SnackBarBehavior.floating,
                                 content: Text(
                                   "This field is already taken.",
                                   style: GoogleFonts.nunito(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
+                                    color: Colors.black,
                                   ),
                                 ),
-                                behavior: SnackBarBehavior.floating,
                               ),
                             );
                             return;
